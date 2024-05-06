@@ -9,7 +9,9 @@ import org.example.doantotnghiep.model.ServiceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,9 +22,20 @@ public class ExaminationServive implements IExaminationService {
     @Autowired
     private ExaminationServiceRepo examinationServiceRepo;
     @Override
-    public Set<ExaminationServiceResponse> getExaminationService(String serviceTypeName) throws Exception {
-        ServiceType serviceType = serviceTypeRepo.findByName(serviceTypeName);
-        Set<ExaminationService> examinationServices = examinationServiceRepo.findByServiceType(serviceType);
+    public List<ExaminationServiceResponse> getExaminationService(String slugServiceName) throws Exception {
+        ServiceType serviceType = serviceTypeRepo.findBySlug(slugServiceName);
+        List<ExaminationService> examinationServices = new ArrayList<>();
+        if(slugServiceName.equals("kham-tinh-than")){
+                    examinationServices = examinationServiceRepo.findAll().stream()
+                    .filter(service -> service.getName().toLowerCase().contains("tâm thần") || service.getName().toLowerCase().contains("tâm lý"))
+                    .collect(Collectors.toList());
+        } else if (slugServiceName.equals("goi-phau-thuat")) {
+            examinationServices = examinationServiceRepo.findAll().stream()
+                    .filter(service -> service.getName().toLowerCase().contains("Phẫu thuật"))
+                    .collect(Collectors.toList());
+        } else {
+            examinationServices = examinationServiceRepo.findByServiceType(serviceType);
+        }
 
         return examinationServices.stream()
                 .map(examinationService -> {
@@ -30,9 +43,12 @@ public class ExaminationServive implements IExaminationService {
                     examinationServiceResponse.setId(examinationService.getId());
                     examinationServiceResponse.setImg(examinationService.getImg());
                     examinationServiceResponse.setName(examinationService.getName());
+                    examinationServiceResponse.setServiceTypeName(serviceType.getName());
+                    examinationServiceResponse.setSlug(serviceType.getSlug());
+                    examinationServiceResponse.setSlugExaminationService(examinationService.getSlug());
                     return examinationServiceResponse;
                 })
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
 }

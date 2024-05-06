@@ -19,8 +19,9 @@ import java.util.Set;
 @Builder
 public class ServiceType extends BaseEntity{
     private String name;
-
+    private String slug;
     @OneToMany(mappedBy = "serviceType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference
     private Set<ExaminationService> examinationServices;
+
 }

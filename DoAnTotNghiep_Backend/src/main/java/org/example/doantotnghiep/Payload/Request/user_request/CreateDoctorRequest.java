@@ -16,6 +16,7 @@ public class CreateDoctorRequest {
     private String description;
     private String password;
     private String specialistName;
+    private String examinationServicename;
     private String position;
     private String gender;
 }

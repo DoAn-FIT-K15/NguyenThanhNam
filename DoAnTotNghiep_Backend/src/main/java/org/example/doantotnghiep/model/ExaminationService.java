@@ -22,7 +22,13 @@ public class ExaminationService extends BaseEntity {
 
     private String name;
 
+    private String shortenedName;
+
+    private String slug;
+
     private String img;
+
+    private String description;
 
     private double price;
 

@@ -8,6 +8,13 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class ExaminationServiceResponse {
+
+    private String serviceTypeName;
+
+    private String slug;
+
+    private String slugExaminationService;
+
     private int id;
 
     private String img;

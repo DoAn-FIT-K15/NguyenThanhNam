@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SpecialistRepo extends JpaRepository<Specialist, Integer> {
     Specialist findByName(String name);
+    Specialist findBySlug(String slug);
     boolean existsByNameAndHospitalName(String name, String hospitalName);
 }

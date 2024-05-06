@@ -16,6 +16,7 @@ import java.util.Set;
 @Builder
 public class Specialist extends BaseEntity{ // Bảng chuyên khoa
     private String name;
+    private String slug;
     private String description;
     @OneToMany(mappedBy = "specialist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference
@@ -28,6 +29,12 @@ public class Specialist extends BaseEntity{ // Bảng chuyên khoa
     @JoinColumn(name = "hospitalId", foreignKey = @ForeignKey(name = "fk_Specialist_Hospital"))
     @JsonManagedReference
     private Hospital hospital;
+
+    @OneToMany(mappedBy = "specialist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Set<Clinic> clinics;
+
+    private int idServiceType;
 
 }
 

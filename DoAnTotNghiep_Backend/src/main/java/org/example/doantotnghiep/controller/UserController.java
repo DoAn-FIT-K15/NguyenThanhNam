@@ -44,9 +44,9 @@ public class UserController {
     }
 
     @GetMapping("/getDoctorbySpecialist")
-    public ResponseEntity<?> getDoctorBySpecialist(@Valid @RequestParam String specialistName) throws Exception {
+    public ResponseEntity<?> getDoctorBySpecialist(@Valid @RequestParam String name) throws Exception {
         try {
-            return ResponseEntity.ok().body(userService.getDoctorbySpecialist(specialistName));
+            return ResponseEntity.ok().body(userService.getDoctorbySpecialist(name));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

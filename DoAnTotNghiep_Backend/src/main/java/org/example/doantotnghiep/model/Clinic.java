@@ -19,8 +19,8 @@ public class Clinic extends BaseEntity{
     private String name;
     private String img;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "specialist_id", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "specialist_id",foreignKey = @ForeignKey(name = "fk_Clinic_Specialist"))
     private Specialist specialist;
 
     @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

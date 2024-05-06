@@ -1,6 +1,7 @@
 package org.example.doantotnghiep.Repository;
 
 import org.example.doantotnghiep.model.ConfirmEmail;
+import org.example.doantotnghiep.model.ExaminationService;
 import org.example.doantotnghiep.model.Specialist;
 import org.example.doantotnghiep.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,4 +19,5 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     User findByConfirmEmails(ConfirmEmail confirmEmail);
 
     Set<User> findBySpecialist(Specialist specialist);
+    Set<User> findByExaminationService(ExaminationService examinationService);
 }

@@ -1,6 +1,9 @@
 package org.example.doantotnghiep.Payload.Response;
 
 import lombok.*;
+import org.example.doantotnghiep.model.Schedule;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -13,4 +16,9 @@ public class DoctorResponse {
     private String position;
     private String description;
     private double price;
+    private String clinicName;
+    private String addressClinic;
+    private String serviceTypeName;
+    private String examinationServicename;
+    private Set<ScheduleResponse> scheduleResponses;
 }

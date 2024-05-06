@@ -44,7 +44,8 @@ public class WebSecurityConfig {
                                     String.format("%s/user/requestForgotPassword", apiPrefix),
                                     String.format("%s/user/confirmForgotPassword", apiPrefix),
                                     String.format("%s/user/getExaminationService", apiPrefix),
-                                    String.format("%s/user/getDoctorbySpecialist", apiPrefix)
+                                    String.format("%s/user/getDoctorbySpecialist", apiPrefix),
+                                    String.format("%s/user/getScheduleByExamName", apiPrefix)
                             )
                             .permitAll()
                             .requestMatchers(POST, String.format("/%s/user/refreshtoken",apiPrefix)).hasRole("ADMIN")

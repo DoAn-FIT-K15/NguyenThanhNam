@@ -17,7 +17,7 @@ public class ExaminationServiceController {
     @Autowired
     private ExaminationServive examinationServive;
     @GetMapping("/getExaminationService")
-    public ResponseEntity<?> getExaminationService(@Valid @RequestParam String serviceTypeName) throws Exception {
-        return ResponseEntity.ok().body(examinationServive.getExaminationService(serviceTypeName));
+    public ResponseEntity<?> getExaminationService(@Valid @RequestParam String slugServiceType) throws Exception {
+        return ResponseEntity.ok().body(examinationServive.getExaminationService(slugServiceType));
     }
 }
