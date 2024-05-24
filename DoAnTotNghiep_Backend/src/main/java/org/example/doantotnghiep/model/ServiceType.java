@@ -24,4 +24,8 @@ public class ServiceType extends BaseEntity{
     @JsonBackReference
     private Set<ExaminationService> examinationServices;
 
+    @OneToMany(mappedBy = "serviceType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Set<Specialist> specialists;
+
 }

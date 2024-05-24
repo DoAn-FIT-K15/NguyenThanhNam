@@ -4,7 +4,7 @@ import org.example.doantotnghiep.Payload.Request.hospital_request.AddHospitalReq
 import org.example.doantotnghiep.Payload.Request.hospital_request.UpdateHospitalRequest;
 import org.example.doantotnghiep.model.Hospital;
 
-public interface IHospital {
+public interface IHospitalService {
     Hospital addHospital(AddHospitalRequest hospital) throws Exception;
     Hospital updateHospital(UpdateHospitalRequest hospital) throws Exception;
     Hospital deleteHospital(int hospitalId) throws Exception;

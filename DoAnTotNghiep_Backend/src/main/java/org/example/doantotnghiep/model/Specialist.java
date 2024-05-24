@@ -34,7 +34,12 @@ public class Specialist extends BaseEntity{ // Bảng chuyên khoa
     @JsonBackReference
     private Set<Clinic> clinics;
 
-    private int idServiceType;
+//    private int serviceTypeId;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "serviceTypeId", foreignKey = @ForeignKey(name = "fk_Specialist_ServiceType"))
+    @JsonManagedReference
+    private ServiceType serviceType;
 
 }
 

@@ -42,9 +42,12 @@ public class Schedule extends BaseEntity{
 
     private String emailPatient;
 
-    private String addressPatient;
+    private String genderPatient;
+
+    private String yearPatient;
+
+    private String reason;
 
     private String medicalHistoryPatient;
 
-    private String medicalHistoryPatientImg;
 }

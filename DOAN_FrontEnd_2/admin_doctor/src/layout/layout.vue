@@ -1,22 +1,33 @@
 <template>
-  <div>
-    <div>
-        <navbar/>
-    </div>
-    <div>
-        <router-view/>
-            <!-- <Schedule/> -->
-    </div>
-    <div class="mb-0">
-        <navFooter/>
-    </div>
+  <div >
+    <router-view/>
   </div>
 </template>
 
 <script setup>
-import navFooter from '@/components/navFooter';
-import navbar from '@/components/navbar';
-import Schedule from'@/pages/Schedule.vue'
+
+import { useStore } from 'vuex';
+import { ref, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router';
+
+const store = useStore()
+const router = useRouter()
+
+const user = computed(() => JSON.parse(localStorage.getItem('user')));
+
+function checkLogin() {
+  const currentUser = user.value; // Lấy giá trị của user từ computed property
+  if (!currentUser) {
+    router.push('/login');
+  } else {
+    router.push('/admin');
+  }
+}
+
+onMounted(() => {
+  checkLogin();
+});
+
 </script>
 
 <style>

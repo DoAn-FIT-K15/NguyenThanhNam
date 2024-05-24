@@ -3,6 +3,7 @@ package org.example.doantotnghiep.configurations;
 
 import lombok.RequiredArgsConstructor;
 import org.example.doantotnghiep.filters.JwtTokenFilter;
+import org.example.doantotnghiep.model.Role;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,20 +43,31 @@ public class WebSecurityConfig {
                                     String.format("%s/user/login", apiPrefix),
                                     String.format("%s/user/confirm-register", apiPrefix),
                                     String.format("%s/user/requestForgotPassword", apiPrefix),
+                                    String.format("%s/user/changePassword", apiPrefix),
                                     String.format("%s/user/confirmForgotPassword", apiPrefix),
                                     String.format("%s/user/getExaminationService", apiPrefix),
                                     String.format("%s/user/getDoctorbySpecialist", apiPrefix),
-                                    String.format("%s/user/getScheduleByExamName", apiPrefix)
+                                    String.format("%s/user/getScheduleByExamName", apiPrefix),
+                                    String.format("%s/user/bookingSchedule", apiPrefix),
+                                    String.format("%s/user/search", apiPrefix),
+                                    String.format("%s/user/getAllDoctor", apiPrefix)
                             )
                             .permitAll()
-                            .requestMatchers(POST, String.format("/%s/user/refreshtoken",apiPrefix)).hasRole("ADMIN")
-                            .requestMatchers(POST, String.format("/%s/user/refreshtoken",apiPrefix)).hasRole("USER")
-                            .requestMatchers(PUT, String.format("/%s/user/changePassword",apiPrefix)).hasRole("USER")
-                            .requestMatchers(PUT, String.format("/%s/user/changePassword",apiPrefix)).hasRole("ADMIN")
-                            .requestMatchers(POST, String.format("/%s/user/createDoctor",apiPrefix)).hasRole("ADMIN")
-                            .requestMatchers(POST, String.format("/%s/user/addHospital",apiPrefix)).hasRole("ADMIN")
-                            .requestMatchers(PUT, String.format("/%s/user/updateHospital",apiPrefix)).hasRole("ADMIN")
-                            .requestMatchers(POST, String.format("/%s/user/addSpecialist",apiPrefix)).hasRole("ADMIN")
+                            .requestMatchers(POST, String.format("/%s/user/refreshtoken",apiPrefix)).hasAnyRole(Role.admin, Role.doctor)
+                            .requestMatchers(POST, String.format("/%s/user/refreshtoken",apiPrefix)).hasAnyRole(Role.admin, Role.doctor)
+                            .requestMatchers(PUT, String.format("/%s/user/changePassword",apiPrefix)).hasRole(Role.doctor)
+                            .requestMatchers(PUT, String.format("/%s/user/changePassword",apiPrefix)).hasRole(Role.admin)
+                            .requestMatchers(POST, String.format("/%s/user/createDoctor",apiPrefix)).hasRole(Role.admin)
+                            .requestMatchers(DELETE, String.format("/%s/user/deleteDoctor",apiPrefix)).hasRole(Role.admin)
+                            .requestMatchers(GET, String.format("/%s/user/getScheduleByDoctor",apiPrefix)).hasRole(Role.doctor)
+                            .requestMatchers(POST, String.format("/%s/user/addSchedule",apiPrefix)).hasRole(Role.doctor)
+                            .requestMatchers(PUT, String.format("/%s/user/resetSchedule",apiPrefix)).hasRole(Role.doctor)
+                            .requestMatchers(DELETE, String.format("/%s/user/deleteSchedule",apiPrefix)).hasRole(Role.doctor)
+                            .requestMatchers(POST, String.format("/%s/user/addHospital",apiPrefix)).hasRole(Role.admin)
+                            .requestMatchers(PUT, String.format("/%s/user/updateHospital",apiPrefix)).hasRole(Role.admin)
+
+                            .requestMatchers(POST, String.format("/%s/user/addSpecialist",apiPrefix)).hasRole(Role.admin)
+//                            .requestMatchers(GET, String.format("/%s/user/getAllDoctor",apiPrefix)).hasRole("ADMIN")
                             .anyRequest().authenticated();
                     //.anyRequest().permitAll();
 

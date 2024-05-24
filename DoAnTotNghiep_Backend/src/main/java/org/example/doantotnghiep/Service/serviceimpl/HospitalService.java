@@ -3,7 +3,7 @@ package org.example.doantotnghiep.Service.serviceimpl;
 import org.example.doantotnghiep.Payload.Request.hospital_request.AddHospitalRequest;
 import org.example.doantotnghiep.Payload.Request.hospital_request.UpdateHospitalRequest;
 import org.example.doantotnghiep.Repository.HospitalRepo;
-import org.example.doantotnghiep.Service.iservice.IHospital;
+import org.example.doantotnghiep.Service.iservice.IHospitalService;
 import org.example.doantotnghiep.exceptions.DataIntegrityViolationException;
 import org.example.doantotnghiep.exceptions.DataNotFoundException;
 import org.example.doantotnghiep.model.Hospital;
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HospitalService implements IHospital {
+public class HospitalService implements IHospitalService {
 
     @Autowired
     private HospitalRepo hospitalRepo;

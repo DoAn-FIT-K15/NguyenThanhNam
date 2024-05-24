@@ -20,6 +20,7 @@
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "bootstrap-vue": "^2.23.1",
+    "boxicons": "^2.1.4",
     "mdb-vue-ui-kit": "^4.1.1",
     "mitt": "^3.0.1",
     "roboto-fontface": "*",

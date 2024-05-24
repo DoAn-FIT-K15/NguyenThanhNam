@@ -29,11 +29,13 @@ public class ExaminationServive implements IExaminationService {
                     examinationServices = examinationServiceRepo.findAll().stream()
                     .filter(service -> service.getName().toLowerCase().contains("tâm thần") || service.getName().toLowerCase().contains("tâm lý"))
                     .collect(Collectors.toList());
-        } else if (slugServiceName.equals("goi-phau-thuat")) {
-            examinationServices = examinationServiceRepo.findAll().stream()
-                    .filter(service -> service.getName().toLowerCase().contains("Phẫu thuật"))
-                    .collect(Collectors.toList());
-        } else {
+        }
+//        else if (slugServiceName.equals("goi-phau-thuat")) {
+//            examinationServices = examinationServiceRepo.findAll().stream()
+//                    .filter(service -> service.getName().toLowerCase().contains("phẫu thuật"))
+//                    .collect(Collectors.toList());
+//        }
+        else {
             examinationServices = examinationServiceRepo.findByServiceType(serviceType);
         }
 

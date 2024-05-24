@@ -46,7 +46,7 @@
                 <div v-for="item in fullService2" :key="item.text" class="col-6  itemService">
                     <div style="width: 100%; height: 100%; border: 2px solid rgb(241, 238, 238);; border-radius: 20px; margin-left: 0; ">
                             <router-link :to="`/dichvukham-s2/${item.slug}`" >
-                                <a href="" style="display: flex; margin-left: 20%;">
+                                <a href="" style="display: flex; ">
                                     <div style="display: flex; align-items: center;">
                                         <img :src="item.img" alt="image" style="max-width: 100%; max-height: 100%;">
                                     </div>
@@ -142,9 +142,7 @@ const listExam = computed(() => {
 
 const slides = ref([
   { src: 'slide1.png' },
-  { src: 'slide2.png' },
   { src: 'slide3.png' },
-  { src: 'slide4.jpg' },
   { src: 'slide5.png' },
 ]);
 
@@ -152,7 +150,7 @@ const fullService1 = [
     { img: "https://cdn.bookingcare.vn/fo/w128/2023/06/07/161905-iconkham-chuyen-khoa.png", text:"Khám Chuyên khoa", slug:"kham-chuyen-khoa"},
     { img:"https://cdn.bookingcare.vn/fo/w128/2023/06/07/161817-iconkham-tu-xa.png", text:"Khám từ xa",  slug:"kham-tu-xa"},
     { img:"https://cdn.bookingcare.vn/fo/w128/2023/06/07/161403-iconsuc-khoe-tinh-than.png", text:"Sức khoẻ tinh thần", slug:"kham-tinh-than"},
-    { img:"https://cdn.bookingcare.vn/fo/w128/2023/06/07/161421-icongoi-phau-thuat.png", text:"Gói Phẫu thuật", slug:"goi-phau-thuat"},
+    // { img:"https://cdn.bookingcare.vn/fo/w128/2023/06/07/161421-icongoi-phau-thuat.png", text:"Gói Phẫu thuật", slug:"goi-phau-thuat"},
 
 ]
 
@@ -180,27 +178,6 @@ const getDataSlideRemote = async(speOrExamName) => {
     alert("error");
   }
 }
-
-// const MoreSpecialist = async() => {
-//     try {
-//         store.dispatch("getDataExam", "Khám Chuyên khoa")
-//         router.push("`/service/${slide.slug}`", )
-//   } catch (error) {
-//     alert("error");
-//   }
-// }
-
-// const MoreRemote = async() => {
-//     try {
-//         store.dispatch("getDataExam", "Khám từ xa")
-//         router.push("`/service/${slide.slug}`", )
-//   } catch (error) {
-//     alert("error");
-//   }
-// }
-
-
-
 
 
 

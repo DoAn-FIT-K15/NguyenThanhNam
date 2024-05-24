@@ -10,7 +10,7 @@
           <a href="" style="text-decoration: none; color: black;" @click.prevent="getDataSchedule2(slide.name)">
             <div class="slide-item">
               <img :src="slide.img" alt="Slide Image" style="height: 170px; width: 280px;">
-              <div class="sub-title mt-3 mb-3">{{ slide.name }}</div>
+              <div class="sub-title mt-3 mb-3" style="max-width: 280px;">{{ slide.name }}</div>
             </div>
           </a>
       </div>

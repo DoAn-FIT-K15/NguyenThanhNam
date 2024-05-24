@@ -1,85 +1,45 @@
-import Schedule from '@/pages/Schedule.vue'
 import  Axios  from 'axios'
 import { createStore } from 'vuex'
 
+const user = JSON.parse(localStorage.getItem('user'));
+
 export default createStore({
   state: {
-    listExam :  [ ],
-    serviceName : JSON.parse(sessionStorage.getItem('serviceName')) || "",
-    listSche : JSON.parse(sessionStorage.getItem('listSche')) ||  [ ],
-    examName : JSON.parse(sessionStorage.getItem('examName')) || "",
-    scheduleTime : JSON.parse(sessionStorage.getItem('scheduleTime')) || null,
+    initialState: user || {},
+
+    listDoctor : [],
+    listSchedule : []
   },
   getters: {
   },
   mutations: {
-    setListExam(state, dataExams){
-      state.listExam = dataExams
+    setListDoctor(state, dataDoctors){
+      state.listDoctor = dataDoctors
     },
-    setListSche(state,dataSches){
-      state.listSche = dataSches
+    setListSchedule(state, dataSchedules){
+      state.listSchedule = dataSchedules
     },
-    setServiceName(state, Name){
-      state.serviceName = Name
-    },
-    setExamName(state, Name){
-      state.examName = Name
-    },
-    setScheduleTime(state, scheduleTime) {
-      state.scheduleTime = scheduleTime;
-    }
   },
   actions: {
-    async getDataExam({commit}, slugServiceType) {
+    async getDataDoctor({commit}) {
       try {
-        const response = await Axios.get(`http://localhost:8088/api/v1/user/getExaminationService?slugServiceType=${slugServiceType}`);
-        commit('setListExam', response.data)
-        commit('setServiceName', response.data[0].serviceTypeName)
+        const response = await Axios.get(`http://localhost:8088/api/v1/user/getAllDoctor`);
+        commit('setListDoctor', response.data)
 
       } catch (error) {
-        alert("error")
+        alert("getListDoctor error")
       }
     },
-
-    async getDataSche({commit}, speOrExamName) {
+    async getDataSchedule({commit}, email) {
       try {
-        const response = await Axios.get(`http://localhost:8088/api/v1/user/getDoctorbySpecialist?name=${speOrExamName}`);
-        sessionStorage.setItem('listSche', JSON.stringify(response.data));
-        sessionStorage.setItem('examName', JSON.stringify(speOrExamName));
-        commit('setListSche', response.data);
-        commit('setExamName', speOrExamName);
-        commit('setServiceName', response.data[0].serviceTypeName)
+        const response = await Axios.get(`http://localhost:8088/api/v1/user/getScheduleByDoctor?email=${email}`);
+        commit('setListSchedule', response.data)
 
       } catch (error) {
-        alert("DataNotFound")
+        alert("getListSchedule error")
       }
     },
-    async getDataSche2({commit}, examName) {
-      try {
-        const response = await Axios.get(`http://localhost:8088/api/v1/user/getScheduleByExamName?name=${examName}`);
-        sessionStorage.setItem('listSche', JSON.stringify(response.data));
-        sessionStorage.setItem('examName', JSON.stringify(response.data.examinationServiceName));
-        commit('setListSche', response.data);
-        // commit('setExamName', response.data[0].examinationServicename);
-        // commit('setServiceName', response.data[0].serviceTypeName)
-
-      } catch (error) {
-        alert("DataNotFound2")
-      }
-    },
-
     
-
-    async saveScheduleTime({commit}, scheduleTime) {
-      try {
-        // Gọi mutation để cập nhật thông tin thời gian lịch trình vào state
-        commit('setScheduleTime', scheduleTime);
-        // Lưu thông tin vào sessionStorage
-        sessionStorage.setItem('scheduleTime', JSON.stringify(scheduleTime));
-      } catch (error) {
-        alert("error")
-      }
-    } 
   },
   modules: {
   }

@@ -18,6 +18,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 public class Role extends BaseEntity {
+    public static String admin = "ADMIN";
+    public static String doctor = "DOCTOR";
     private String name;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

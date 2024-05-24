@@ -1,57 +1,20 @@
 import Admin from '@/pages/Admin.vue'
-import Booking from '@/pages/Booking.vue'
-import Schedule from '@/pages/Schedule.vue'
-import Scheduless2 from '@/pages/Scheduless2.vue'
-import Services1 from '@/pages/Services1.vue'
-import Services2 from '@/pages/Services2.vue'
 import Signin from '@/pages/Signin.vue'
-import Home from '@/views/Home.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 
 
 const routes = [
   {
-    path: '/',
-    component: Home
+    path: '/admin',
+    component: Admin
   },
   {
     path: '/login',
     component: Signin,
     meta: { scrollToTop: true },
   },
-  {
-    path: '/admin',
-    component: Admin,
-    meta: { scrollToTop: true },
-  },
-  {
-    path: '/dichvukham/:serviceName',
-    component: Services1,
-    meta: { scrollToTop: true },
-  },
-  {
-    path: '/dichvukham-s2/:serviceName',
-    component: Services2,
-    meta: { scrollToTop: true },
-  },
-  {
-    path: '/lichtrinh',
-    component: Schedule,
-    meta: { scrollToTop: true }
-  },
-  {
-    path: '/lichtrinh-s2',
-    component: Scheduless2,
-    meta: { scrollToTop: true }
-  },
-
-  {
-    path: '/datlich',
-    component: Booking,
-    meta: { scrollToTop: true }
-  },
-  
+ 
 
 ]
 

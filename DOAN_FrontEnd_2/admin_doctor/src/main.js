@@ -17,6 +17,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/reset.css';
 
+import 'boxicons'
+
+import 'boxicons/css/boxicons.min.css';
+
+
 // import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 // import 'bootstrap/dist/css/bootstrap.css'

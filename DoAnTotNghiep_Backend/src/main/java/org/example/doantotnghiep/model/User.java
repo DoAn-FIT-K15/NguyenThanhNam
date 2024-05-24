@@ -34,6 +34,7 @@ public class User extends BaseEntity implements UserDetails {
     private double price;
     private boolean isActive;
     private String position;
+    private String slug;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;

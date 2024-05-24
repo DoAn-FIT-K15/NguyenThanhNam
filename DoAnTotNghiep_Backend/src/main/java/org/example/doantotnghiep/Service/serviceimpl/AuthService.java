@@ -1,6 +1,7 @@
 package org.example.doantotnghiep.Service.serviceimpl;
 
 import lombok.Getter;
+import org.example.doantotnghiep.Payload.Request.auth_request.ChangePasswordRequest;
 import org.example.doantotnghiep.Payload.Request.auth_request.ConfirmForgotPasswordRequest;
 import org.example.doantotnghiep.Payload.Request.auth_request.LoginRequest;
 import org.example.doantotnghiep.Payload.Request.auth_request.RegisterRequest;
@@ -46,14 +47,13 @@ public class AuthService implements IAuthService {
     private  final AuthenticationManager authenticationManager;
     @Autowired
     private UserDetailsService userDetailsService;
-
-
     @Autowired
     private JwtTokenUtils jwtTokenUtils;
     @Autowired
     private RefreshTokenService refreshTokenService;
     @Autowired
     private ConfirmEmailRepo confirmEmailRepo;
+    private final BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
 
     private final Map<String, RegisterRequest> pendingRegistrations = new HashMap<>();
     @Getter
@@ -120,6 +120,22 @@ public class AuthService implements IAuthService {
                 .roles(roles)
                 .build();
         return loginDTO;
+    }
+
+    @Override
+    public String changePassWord(ChangePasswordRequest changePasswordRequest) throws Exception {
+        User user = userRepo.findByEmail(changePasswordRequest.getEmail()).get();
+        String oldPassword = user.getPassword();
+        boolean passwordMatch = bCrypt.matches(changePasswordRequest.getOldPassword(), oldPassword);
+        if(!passwordMatch){
+            throw new DataNotFoundException(MessageKeys.CURRENT_PASSWORD_INCORRECT);
+        }
+        if(!changePasswordRequest.getNewPassword().equals(changePasswordRequest.getRetypePassword())){
+            throw new DataIntegrityViolationException(MessageKeys.CONFIRM_PASSWORD_INCORRECT);
+        }
+        user.setPassword(bCrypt.encode(changePasswordRequest.getNewPassword()));
+        userRepo.save(user);
+        return "Đổi mật khẩu thành công";
     }
 
 

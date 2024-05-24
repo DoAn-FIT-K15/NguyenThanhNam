@@ -21,32 +21,54 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PutMapping("/changePassword")
-    public ResponseEntity<?> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest) throws Exception {
-        try{
-            String result =  userService.changePassword(changePasswordRequest);
-            return ResponseEntity.ok().body(result);
-
-        }catch (DataNotFoundException e){
-            throw new DataNotFoundException(e.getMessage());
-        }
-    }
+//    @PutMapping("/changePassword")
+//    public ResponseEntity<?> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest) throws Exception {
+//        try{
+//            String result =  userService.changePassword(changePasswordRequest);
+//            return ResponseEntity.ok().body(result);
+//
+//        }catch (DataNotFoundException e){
+//            throw new DataNotFoundException(e.getMessage());
+//        }
+//    }
 
     @PostMapping("/createDoctor")
     public ResponseEntity<?> createDoctor(@Valid @RequestBody CreateDoctorRequest createDoctorRequest) throws Exception{
         try {
             User doctor = userService.createDoctor(createDoctorRequest);
             return ResponseEntity.ok().body(doctor);
-
         }catch (DataIntegrityViolationException ex){
             return ResponseEntity.badRequest().body(ex.getMessage());
+        } catch (DataNotFoundException ex){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+    @DeleteMapping("/deleteDoctor")
+    public ResponseEntity<?> deleteDoctor(@Valid @RequestParam String email) throws Exception {
+        try {
+            return ResponseEntity.ok().body(userService.deleteDoctor(email));
+        }catch (DataNotFoundException ex){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
     @GetMapping("/getDoctorbySpecialist")
     public ResponseEntity<?> getDoctorBySpecialist(@Valid @RequestParam String name) throws Exception {
         try {
-            return ResponseEntity.ok().body(userService.getDoctorbySpecialist(name));
+            return ResponseEntity.ok().body(userService.getSchedulebySpecialist(name));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/getAllDoctor")
+    public ResponseEntity<?> getAllDoctor() throws Exception {
+        try {
+            return ResponseEntity.ok().body(userService.getAllDoctor());
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

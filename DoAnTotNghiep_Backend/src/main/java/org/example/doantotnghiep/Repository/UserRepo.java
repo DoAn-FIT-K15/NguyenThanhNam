@@ -14,9 +14,12 @@ import java.util.Set;
 public interface UserRepo extends JpaRepository<User, Integer> {
     Optional<User> findByEmail(String email);
 
+    User findBySlug(String slug);
+
     boolean existsByEmail(String email);
 
     User findByConfirmEmails(ConfirmEmail confirmEmail);
+
 
     Set<User> findBySpecialist(Specialist specialist);
     Set<User> findByExaminationService(ExaminationService examinationService);

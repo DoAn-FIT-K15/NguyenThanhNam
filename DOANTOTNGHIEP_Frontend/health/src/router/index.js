@@ -1,7 +1,8 @@
 import Admin from '@/pages/Admin.vue'
 import Booking from '@/pages/Booking.vue'
 import Schedule from '@/pages/Schedule.vue'
-import Scheduless2 from '@/pages/Scheduless2.vue'
+import Search from '@/pages/Search.vue'
+import Schedules2 from '@/pages/Schedules2.vue'
 import Services1 from '@/pages/Services1.vue'
 import Services2 from '@/pages/Services2.vue'
 import Signin from '@/pages/Signin.vue'
@@ -14,6 +15,11 @@ const routes = [
   {
     path: '/',
     component: Home
+  },
+  {
+    path: '/timkiem',
+    component: Search,
+    meta: { scrollToTop: true },
   },
   {
     path: '/login',
@@ -42,7 +48,7 @@ const routes = [
   },
   {
     path: '/lichtrinh-s2',
-    component: Scheduless2,
+    component: Schedules2,
     meta: { scrollToTop: true }
   },
 

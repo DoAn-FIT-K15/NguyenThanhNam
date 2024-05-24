@@ -29,6 +29,14 @@ public class MessageKeys {
 
     public static final String USER_DOES_NOT_EXIST = "User does not exist";
 
+    public static final String SCHEDULE_HAS_BEEN_BOOKED = "Lịch trình đã được đặt";
+
+    public static final String SPECIALIST_HAS_NOT_EXIST = "Specialist has not exist";
+
+    public static final String DOCTOR_HAS_BEEN_DELETED = "Bác sĩ đã bị xoá trước đó";
+
+    public static final String CURRENT_PASSWORD_INCORRECT = "Mật khẩu hiện tại không đúng";
+
     public static final String CONFIRM_PASSWORD_INCORRECT = "Confirm password incorrect";
 
     public static final String CODE_ALREADY_EXISTS = "Code has already existed";

@@ -80,16 +80,18 @@ public class JwtTokenFilter extends OncePerRequestFilter{
 
         final List<Pair<String, String>> bypassTokens = Arrays.asList(
                 Pair.of(String.format("%s/roles", apiPrefix), "GET"),
-//                Pair.of(String.format("%s/products", apiPrefix), "GET"),
-//                Pair.of(String.format("%s/categories", apiPrefix), "GET"),
                 Pair.of(String.format("%s/user/register", apiPrefix), "POST"),
                 Pair.of(String.format("%s/user/login", apiPrefix), "POST"),
                 Pair.of(String.format("%s/user/confirm-register", apiPrefix), "GET"),
                 Pair.of(String.format("%s/user/requestForgotPassword", apiPrefix), "POST"),
                 Pair.of(String.format("%s/user/confirmForgotPassword", apiPrefix), "GET"),
+                Pair.of(String.format("%s/user/changePassword", apiPrefix), "PUT"),
                 Pair.of(String.format("%s/user/getExaminationService", apiPrefix), "GET"),
                 Pair.of(String.format("%s/user/getDoctorbySpecialist", apiPrefix), "GET"),
-                Pair.of(String.format("%s/user/getScheduleByExamName", apiPrefix), "GET")
+                Pair.of(String.format("%s/user/getScheduleByExamName", apiPrefix), "GET"),
+                Pair.of(String.format("%s/user/bookingSchedule", apiPrefix), "PUT"),
+                Pair.of(String.format("%s/user/search", apiPrefix), "GET"),
+                Pair.of(String.format("%s/user/getAllDoctor", apiPrefix), "GET")
         );
         for(Pair<String, String> bypassToken: bypassTokens) {
             if (request.getServletPath().contains(bypassToken.getFirst()) &&

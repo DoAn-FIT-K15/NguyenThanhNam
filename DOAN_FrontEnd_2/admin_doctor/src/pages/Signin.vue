@@ -13,7 +13,7 @@
           <div>
             <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email đăng nhập</label>
             <div class="mt-2">
-              <input 
+              <v-text-field variant="solo" density="compact"
                 v-model="userLogin.email" 
                   :rules="emailRules"
                   id="email" 
@@ -33,7 +33,7 @@
               </div>
             </div>
             <div class="mt-2">
-              <input 
+              <v-text-field variant="solo" density="compact"
                 v-model="userLogin.password" 
                   :rules="passwordRules"
                   id="password" 
@@ -41,7 +41,7 @@
                   type="password" 
                   autocomplete="current-password" 
                   required="" 
-                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                  class=" block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"  />
             </div>
           </div>
 
@@ -49,9 +49,9 @@
             <button @click="handleSignIn" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Đăng nhập</button>
           </div>
 
-          <div class="text-md" >
+          <!-- <div class="text-md" >
                 <a style="text-decoration: none;" href="/" class="font-semibold text-indigo-600 hover:text-indigo-500">Trở về trang chủ</a>
-          </div>
+          </div> -->
         </form>
       </div>
     </div>
@@ -63,6 +63,7 @@ import { ref, computed } from 'vue';
 import axios from 'axios'
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { stringify } from 'postcss';
 
 const router = useRouter()
 
@@ -80,7 +81,7 @@ const emailRules = [
 const passwordRules = [
     value => {
         if(value.length < 3){
-            return "Tên phải có ít nhất 3 ký tự";
+            return "Mật khẩu phải có ít nhất 3 ký tự";
         }
         return true;
     }
@@ -97,10 +98,9 @@ const handleSignIn = async() => {
       email : userLogin.value.email,
       password : userLogin.value.password
     }
-
     const response = await axios.post("http://localhost:8088/api/v1/user/login", user)
+    localStorage.setItem('user', JSON.stringify(response.data))
     router.push("/admin")
-    alert("Đăng nhập thành công")
     
   } catch (error) {
     if(error.response.status == "404"){

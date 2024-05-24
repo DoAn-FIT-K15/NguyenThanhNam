@@ -2,6 +2,7 @@ package org.example.doantotnghiep.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.doantotnghiep.Payload.Request.auth_request.ChangePasswordRequest;
 import org.example.doantotnghiep.Payload.Request.auth_request.ConfirmForgotPasswordRequest;
 import org.example.doantotnghiep.Payload.Request.auth_request.LoginRequest;
 import org.example.doantotnghiep.Payload.Request.auth_request.RegisterRequest;
@@ -102,10 +103,23 @@ public class AuthController {
         }catch (ConfirmEmailExpired ex){
             return ResponseEntity.badRequest().body(ex.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
+
+    @PutMapping("/changePassword")
+    public ResponseEntity<?> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest) throws Exception{
+        try {
+            return ResponseEntity.ok().body(authService.changePassWord(changePasswordRequest));
+        }catch (DataNotFoundException ex){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        }catch (DataIntegrityViolationException ex){
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }catch (Exception ex){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+        }
+    }
     @PostMapping("/requestForgotPassword")
     public ResponseEntity<?> requestForgotPassword(@RequestParam String email){
         try {
