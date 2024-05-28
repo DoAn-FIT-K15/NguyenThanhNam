@@ -7,7 +7,7 @@
       <p class="title mb-0">{{ serviceName }}</p>
     </div>
     <p style="font-weight: 550 !important; font-size: 20px; margin-bottom: 10px;">{{ examName }}</p>
-    <div  style="font-size: 14px;">
+    <div style="font-size: 14px;">
       <h6>Bác sĩ {{ examName }} giỏi</h6>
       <p style="margin-top: 1em;">Danh sách các bác sĩ uy tín đầu ngành {{ examName }} tại Việt Nam:</p>
       <ul style="list-style-type: disc; margin-left: 5%; margin-bottom: 0;">
@@ -15,7 +15,8 @@
         <li>Các giáo sư, phó giáo sư đang trực tiếp nghiên cứu và giảng dạy tại Đại học Y khoa Hà Nội</li>
       </ul>
       <ul v-if="isMoreInfor" style="list-style-type: disc; margin-left: 5%; margin-bottom: 0;">
-        <li>Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu Khoa {{ examName }} - Bệnh viện Bạch Mai, Bệnh viện Hữu nghị Việt Đức, Bệnh Viện E,...</li>
+        <li>Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu Khoa {{ examName }} - Bệnh viện Bạch Mai, Bệnh viện
+          Hữu nghị Việt Đức, Bệnh Viện E,...</li>
         <li>Được nhà nước công nhận các danh hiệu Thầy thuốc Nhân dân, Thầy thuốc Ưu tú, Bác sĩ Cao cấp,...</li>
       </ul>
       <button style="color: #49bce2;" @click="moreInfor" v-if="isShowButtonMore">Xem thêm</button>
@@ -24,7 +25,7 @@
         <ul style="list-style-type: disc; margin-left: 5%; margin-bottom: 0;">
           <li v-for="(item, index) in listSche[0].pathologicals" :key="index">{{ item }}</li>
         </ul>
-        <button style="color: #49bce2;" @click="lessInfor" v-if="isShowButtonLess" >Ẩn bớt</button>
+        <button style="color: #49bce2;" @click="lessInfor" v-if="isShowButtonLess">Ẩn bớt</button>
       </div>
     </div>
   </div>
@@ -41,8 +42,9 @@
             </a>
           </div>
           <div class="" style="font-size: 14px; margin-left: 2%; margin-right: 3%;">
-            <p style="font-size: 18px; color: rgb(69 195 210/ 1) !important; font-weight: 600; margin-bottom: 7px !important;">
-            {{ item.position }} <span>{{ item.name }}</span></p>
+            <p
+              style="font-size: 18px; color: rgb(69 195 210/ 1) !important; font-weight: 600; margin-bottom: 7px !important;">
+              {{ item.position }} <span>{{ item.name }}</span></p>
             <template v-for="(sentence, index) in getDescriptionSentences(item.description)" :key="index">
               <p style="margin-bottom: 3px; ">{{ sentence }}</p>
             </template>
@@ -50,35 +52,40 @@
         </div>
         <div class="col-md-6 col-12 mt-3 mb-3">
           <div class="ml-10 mr-10">
-            <select v-model="item.selectedDay" class="custom-select" 
-            style="font-size: 16px; color: rgb(51 122 183/ 1); font-weight: 500 !important;">
+            <select v-model="item.selectedDay" class="custom-select"
+              style="font-size: 16px; color: rgb(51 122 183/ 1); font-weight: 500 !important;">
               <option v-for="day in daysOfWeek" :value="day" :key="day">{{ day }}</option>
             </select>
             <ul class="row mt-2 mb-2">
-              <li class="schedule-item col-xl-3 col-lg-4 col-md-6 col-sm-4 col-6" v-for="schedule in filteredSchedules(item)" 
-              :key="schedule.time" 
-              @click="handleScheduleClick(item, schedule, { avata: item.avata, name: item.name, position: item.position, price: item.price })">
-                <p class="mb-0" 
-                style="font-size: 14px;  font-weight: 550 !important;"> 
-                {{ schedule.time }}</p>
+              <li class="schedule-item col-xl-3 col-lg-4 col-md-6 col-sm-4 col-6"
+                v-for="schedule in filteredSchedules(item)" :key="schedule.time"
+                @click="handleScheduleClick(item, schedule, { avata: item.avata, name: item.name, position: item.position, price: item.price })">
+                <p class="mb-0" style="font-size: 14px;  font-weight: 550 !important;">
+                  {{ schedule.time }}</p>
               </li>
             </ul>
           </div>
 
-          <div v-if="filteredSchedules(item).length > 0"  class="scheduleInfor" style="font-size: 14px;">
+          <div v-if="filteredSchedules(item).length > 0" class="scheduleInfor" style="font-size: 14px;">
             <div class="ml-10 mr-10" style="border-bottom: 1px solid #ced4da;">
               <p style="margin-bottom: 5px !important;">Chọn và đặt (Phí đặt lịch 0đ)</p>
             </div>
 
-            <div class="mt-2 ml-10 mr-10" style="border-bottom: 1px solid #ced4da;">
-              ĐỊA CHỈ KHÁM 
-              <p style="margin-bottom: 0; font-weight: 550;">{{item.clinicName}}</p>
-              <p style="margin-bottom: 5px !important;">{{item.addressClinic}}</p>
+            <div v-if="item.clinicName !== 'TƯ VẤN QUA VIDEO'" class="mt-2 ml-10 mr-10"
+              style="border-bottom: 1px solid #ced4da;">
+              ĐỊA CHỈ KHÁM
+              <p style="margin-bottom: 0; font-weight: 550;">{{ item.clinicName }}</p>
+              <p style="margin-bottom: 5px !important;">{{ item.addressClinic }}</p>
+            </div>
+            <div v-if="item.clinicName === 'TƯ VẤN QUA VIDEO'" class="mt-2 ml-10 mr-10"
+              style="border-bottom: 1px solid #ced4da;">
+              <p style="margin-bottom: 0; font-weight: 550;">{{ item.clinicName }}</p>
+              <p style="margin-bottom: 5px !important;">{{ item.addressClinic }}</p>
             </div>
 
             <div class="mt-2 ml-10 mr-10">
-              GIÁ KHÁM: 
-              <span style="margin-bottom: 0; font-weight: 550;">{{formatPrice(item.price)}}</span>
+              GIÁ KHÁM:
+              <span style="margin-bottom: 0; font-weight: 550;">{{ formatPrice(item.price) }}</span>
             </div>
           </div>
 
@@ -104,7 +111,7 @@ const examName = computed(() => store.state.examName);
 const listSche = ref([]);
 
 
-onMounted(()=> {
+onMounted(() => {
 }
 )
 
@@ -127,7 +134,7 @@ const getDescriptionSentences = (description) => {
   if (!description || description.trim() === '') {
     return [];
   }
-  
+
   // Phân tách đoạn văn thành mảng các câu bởi dấu chấm
   return description.split('.').filter(sentence => sentence.trim() !== '');
 };
@@ -156,17 +163,45 @@ const daysOfWeek = computed(() => {
   return Array.from(uniqueDays).sort();
 });
 
+// watchEffect(() => {
+//   // Lấy giá trị mới của listSche từ store
+//   listSche.value = store.state.listSche;
+
+//   // Kiểm tra xem listSche đã được gán giá trị chưa
+//   if (listSche.value.length > 0) {
+//     listSche.value.forEach(item => {
+//       item.selectedDay = daysOfWeek.value[0];
+//     });
+//   }
+// });
 watchEffect(() => {
   // Lấy giá trị mới của listSche từ store
   listSche.value = store.state.listSche;
 
   // Kiểm tra xem listSche đã được gán giá trị chưa
   if (listSche.value.length > 0) {
+    const today = new Date();
+
+    // Hàm để chuyển đổi chuỗi ngày tháng thành đối tượng Date
+    const parseDate = (str) => {
+      const [dayOfWeek, dateStr] = str.split(' - ');
+      const [day, month, year] = dateStr.split('/').map(Number);
+      return new Date(year, month - 1, day);
+    };
+
     listSche.value.forEach(item => {
-      item.selectedDay = daysOfWeek.value[0];
+      const availableDays = daysOfWeek.value.map(parseDate);
+      const closestDate = availableDays.reduce((closest, current) => {
+        return Math.abs(current - today) < Math.abs(closest - today) ? current : closest;
+      });
+
+      // Định dạng lại closestDate thành chuỗi tương ứng với định dạng trong daysOfWeek
+      const closestDateString = daysOfWeek.value.find(day => parseDate(day).getTime() === closestDate.getTime());
+      item.selectedDay = closestDateString;
     });
   }
 });
+
 
 
 // const filteredSchedules = (item) => {
@@ -193,21 +228,22 @@ const formatPrice = (price) => {
 
 
 const handleScheduleClick = async (item, schedule, doctor) => {
-    // Tạo đối tượng mới chứa các giá trị
-    const scheduleTime = {
-        scheduleID : schedule.id,
-        time : schedule.time,
-        addressClinic: schedule.addressClinic,
-        selectedDay: item.selectedDay,
-        avata: doctor.avata,
-        name: doctor.name,
-        position: doctor.position,
-        price : formatPrice(doctor.price)
-    };
-    console.log(scheduleTime)
-    // Gửi đối tượng này đến Vuex sử dụng mutation hoặc action
-    store.dispatch('saveScheduleTime', scheduleTime);
-    router.push("/datlich")
+  // Tạo đối tượng mới chứa các giá trị
+  const scheduleTime = {
+    scheduleID: schedule.id,
+    time: schedule.time,
+    nameClinic: item.clinicName,
+    addressClinic: item.addressClinic,
+    selectedDay: item.selectedDay,
+    avata: doctor.avata,
+    name: doctor.name,
+    position: doctor.position,
+    price: formatPrice(doctor.price)
+  };
+  console.log(scheduleTime)
+  // Gửi đối tượng này đến Vuex sử dụng mutation hoặc action
+  store.dispatch('saveScheduleTime', scheduleTime);
+  router.push("/datlich")
 }
 
 </script>

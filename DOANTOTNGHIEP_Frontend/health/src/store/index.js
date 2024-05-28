@@ -7,12 +7,16 @@ export default createStore({
     listExam :  [ ],
     serviceName : JSON.parse(sessionStorage.getItem('serviceName')) || "",
     listSche : JSON.parse(sessionStorage.getItem('listSche')) ||  [ ],
+    listScheduleByDoctor : {},
     examName : JSON.parse(sessionStorage.getItem('examName')) || "",
     scheduleTime : JSON.parse(sessionStorage.getItem('scheduleTime')) || null,
   },
   getters: {
   },
   mutations: {
+    setScheduleByDoctor(state, dataSchedules){
+      state.listScheduleByDoctor = dataSchedules;
+    },
     setListExam(state, dataExams){
       state.listExam = dataExams
     },
@@ -65,6 +69,17 @@ export default createStore({
 
       } catch (error) {
         alert("DataNotFound2")
+      }
+    },
+
+    async getScheduleByDoctor({commit}, email) {
+      try {
+        console.log(email)
+        const response = await Axios.get(`http://localhost:8088/api/v1/user/getScheduleByDoctor?email=${email}`);
+        commit('setScheduleByDoctor', response.data)
+
+      } catch (error) {
+        alert("getListSchedule error")
       }
     },
 

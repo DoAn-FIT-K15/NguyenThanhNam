@@ -1,14 +1,13 @@
-import Admin from '@/pages/Admin.vue'
+
 import Booking from '@/pages/Booking.vue'
+import Booked from '@/pages/Booked.vue'
 import Schedule from '@/pages/Schedule.vue'
 import Search from '@/pages/Search.vue'
 import Schedules2 from '@/pages/Schedules2.vue'
 import Services1 from '@/pages/Services1.vue'
 import Services2 from '@/pages/Services2.vue'
-import Signin from '@/pages/Signin.vue'
 import Home from '@/views/Home.vue'
 import { createRouter, createWebHistory } from 'vue-router'
-
 
 
 const routes = [
@@ -17,18 +16,13 @@ const routes = [
     component: Home
   },
   {
+    path: '/lichhen',
+    component: Booked,
+    meta: { scrollToTop: true },
+  },
+  {
     path: '/timkiem',
     component: Search,
-    meta: { scrollToTop: true },
-  },
-  {
-    path: '/login',
-    component: Signin,
-    meta: { scrollToTop: true },
-  },
-  {
-    path: '/admin',
-    component: Admin,
     meta: { scrollToTop: true },
   },
   {

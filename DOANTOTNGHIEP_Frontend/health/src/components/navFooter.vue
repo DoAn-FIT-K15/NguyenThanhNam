@@ -1,6 +1,6 @@
 <template>
-  <v-app>
-    <v-footer class="d-flex flex-column" style="padding: 0 !important;">
+  <div>
+    <div class="d-flex flex-column" style="padding: 0 !important;">
       <div class="row py-5 w-100" style="background: rgb(237, 255, 250);">
         <div class="row col-xl-9 col-lg-10 col-sm-12" style="margin: auto;">
           <div class="col-xl-5 col-lg-5 col-md-7 col-sm-12 ">
@@ -57,7 +57,7 @@
       </div>
 
       <div class="row  w-100 align-center px-4" style="background-color: rgb(150 215 229/ 1);">
-        <h6 class="col-6">© 2024 BookingCare.</h6>
+        <h6 class="col-6">© 2024 HealthCare.</h6>
         <ul class="social-icons col-6"
           style="display: flex; justify-content: space-evenly; align-items: center; margin: auto;  font-size: 40px;">
           <li v-for="(item, index) in items" :key="index">
@@ -67,8 +67,8 @@
           </li>
         </ul>
       </div>
-    </v-footer>
-  </v-app>
+    </div>
+  </div>
 </template>
 
 

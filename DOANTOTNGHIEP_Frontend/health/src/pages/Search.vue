@@ -21,13 +21,15 @@
                 <ul>
                     <p style="font-weight: 600; font-size: 20px;" class="bg-gray-100">Bác sĩ</p>
                     <li v-for="doctor in searchResults.doctors" :key="doctor.slug" class="doctor-item">
-                        <div class="doctor-info">
+                        <router-link :to="`/bacsi/${doctor.email}`">
+                            <div class="doctor-info">
                             <img :src="doctor.avata" class="doctor-avatar" alt="Avatar">
                             <div class="doctor-details">
-                                <p style="font-weight: 600; margin-bottom: 0;">{{ doctor.name }}</p>
+                                <p style="font-weight: 600; margin-bottom: 0;">{{ doctor.position }}{{ doctor.name }}</p>
                                 <p style="margin-bottom: 0;">{{ doctor.specialistName }}</p>
                             </div>
                         </div>
+                        </router-link>
                     </li>
                 </ul>
             </div>

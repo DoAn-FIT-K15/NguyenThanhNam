@@ -22,6 +22,12 @@ import 'ant-design-vue/dist/reset.css';
 // import 'bootstrap/dist/css/bootstrap.css'
 // import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import 'boxicons'
+
+import 'boxicons/css/boxicons.min.css';
+
+
+
 
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

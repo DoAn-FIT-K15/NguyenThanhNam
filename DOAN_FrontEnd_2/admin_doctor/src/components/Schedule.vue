@@ -136,6 +136,7 @@ const store = useStore()
 // Khai báo biến listSchedule
 const listSchedule = ref([]);
 
+const search = ref('')
 
 const email = computed(() => JSON.parse(localStorage.getItem('user')).userName);
 // Lấy token từ localStorage
@@ -161,7 +162,7 @@ const fetchSchedules = async () => {
   }
 };
 
-// Khi component được mounted, tự động gọi action getDataSchedule
+
 onMounted(async () => {
   await fetchSchedules();
 });
@@ -221,6 +222,7 @@ const addScheduleItem = async () => {
       }
     );
     alert("Thêm lịch trình thành công")
+    await fetchSchedules();
 
   } catch (error) {
     if (error.response.status == "400") {

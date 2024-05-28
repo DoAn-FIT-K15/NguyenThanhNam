@@ -90,6 +90,7 @@ public class JwtTokenFilter extends OncePerRequestFilter{
                 Pair.of(String.format("%s/user/getDoctorbySpecialist", apiPrefix), "GET"),
                 Pair.of(String.format("%s/user/getScheduleByExamName", apiPrefix), "GET"),
                 Pair.of(String.format("%s/user/bookingSchedule", apiPrefix), "PUT"),
+                Pair.of(String.format("%s/user/getScheduleByDoctor", apiPrefix), "GET"),
                 Pair.of(String.format("%s/user/search", apiPrefix), "GET"),
                 Pair.of(String.format("%s/user/getAllDoctor", apiPrefix), "GET")
         );

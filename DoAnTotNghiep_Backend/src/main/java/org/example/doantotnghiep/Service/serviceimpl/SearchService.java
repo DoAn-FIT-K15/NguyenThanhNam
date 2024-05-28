@@ -25,10 +25,11 @@ public class SearchService implements ISearchService {
 
         List<DoctorSearchResponse> doctorSearchResponses = userRepo.findAll().stream()
                 .filter(user -> user.getRole().getId() == 2)
-                .filter(doctor -> doctor.getName().toLowerCase().contains(name.toLowerCase()) || doctor.getPosition().toLowerCase().contains(name.toLowerCase()))
+                .filter(doctor -> doctor.getName().toLowerCase().contains(name.toLowerCase()))
                 .map(doctor -> DoctorSearchResponse.builder()
                         .avata(doctor.getAvata())
-                        .name(doctor.getPosition() + doctor.getName())
+                        .position(doctor.getPosition())
+                        .name(doctor.getName())
                         .specialistName(doctor.getSpecialist().getName())
                         .email(doctor.getEmail())
                         .slug(doctor.getSlug())

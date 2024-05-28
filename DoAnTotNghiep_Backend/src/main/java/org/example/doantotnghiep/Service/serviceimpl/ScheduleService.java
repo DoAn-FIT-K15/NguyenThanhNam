@@ -242,7 +242,7 @@ public class ScheduleService implements IScheduleService {
         String content = " Xin chào, " + namePatient + ". \n Cảm ơn bạn đã tin tưởng và đặt lịch khám qua HealthCare.\n"
         + "\n Thông tin chi tiết về lịch khám :"
                 + "\n    Ngày khám : " + dayOfWeek + "\n    Thời gian : "+ time + "\n    Phòng khám : "
-                + clinicName + "\n    Địa chỉ : " + clinicAddress + " Xin vui lòng đến sớm 15 phút trước giờ khám để hoàn tất thủ tục.\n"
+                + clinicName + "\n    Địa chỉ : " + clinicAddress + " Xin vui lòng để ý điện thoại. Chúng tôi sẽ liên hệ với bạn sớm !\n"
                 + "\n Nếu cần thêm thông tin hoặc hỗ trợ, vui lòng liên hệ với chúng tôi qua số điện thoại 0904167382 hoặc healthcare@gmail.com.\n"
                 +"\n Trân trọng," + "\n HealthCare Team";
         sendEmail(email,subject,content);

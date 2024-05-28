@@ -23,7 +23,8 @@
 
     <div class="mt-4" style="width: 80%; margin: auto;">
         <div class="comprehensive-service  mt-3 col-xl-12 " 
-        style=" font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important; ">
+        style=" font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important; "
+        v-if="typeNameService==='Tất cả' || typeNameService==='Tại viện'">
             <div>
                 <h2>Dịch vụ toàn diện</h2>
             </div>
@@ -62,7 +63,7 @@
         </div>
     </div>
 
-    <div class="slider-container" style=" font-family: Montserrat, sans-serif !important; font-size: 13px;">
+    <div class="slider-container" style=" font-family: Montserrat, sans-serif !important; font-size: 13px;" v-if="typeNameService==='Tất cả' || typeNameService==='Tại viện'">
         <div style="display: flex; align-items: center; justify-content: space-between;">
             <h2>Chuyên khoa</h2>
             <div style="font-family: Montserrat, sans-serif !important;  ;
@@ -90,7 +91,8 @@
         </div>
     </div>
 
-    <div class="slider-container mt-10" style=" font-family: Montserrat, sans-serif !important; font-size: 13px;">
+    <div class="slider-container mt-10" style=" font-family: Montserrat, sans-serif !important; font-size: 13px;"
+    v-if="typeNameService==='Tất cả' || typeNameService==='Tại nhà'">
         <div style="display: flex; align-items: center; justify-content: space-between;">
             <h2>Khám từ xa</h2>
             <div style="font-family: Montserrat, sans-serif !important;  ;
@@ -133,6 +135,18 @@ import { useRouter } from 'vue-router';
 const router = useRouter()
 
 const store = useStore() 
+
+const typeNameService = ref('Tất cả')
+
+
+// Trong phần setup
+onMounted(() => {
+  eventBus.on('selectedItem', (itemName) => {
+    // Xử lý itemName tại đây
+    console.log('Received item name:', itemName);
+    typeNameService.value = itemName
+  });
+});
 
 const listExam = computed(() => {
     return store.state.listExam

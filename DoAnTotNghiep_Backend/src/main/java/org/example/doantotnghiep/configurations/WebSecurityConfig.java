@@ -49,6 +49,7 @@ public class WebSecurityConfig {
                                     String.format("%s/user/getDoctorbySpecialist", apiPrefix),
                                     String.format("%s/user/getScheduleByExamName", apiPrefix),
                                     String.format("%s/user/bookingSchedule", apiPrefix),
+                                    String.format("%s/user/getScheduleByDoctor", apiPrefix),
                                     String.format("%s/user/search", apiPrefix),
                                     String.format("%s/user/getAllDoctor", apiPrefix)
                             )
@@ -59,7 +60,7 @@ public class WebSecurityConfig {
                             .requestMatchers(PUT, String.format("/%s/user/changePassword",apiPrefix)).hasRole(Role.admin)
                             .requestMatchers(POST, String.format("/%s/user/createDoctor",apiPrefix)).hasRole(Role.admin)
                             .requestMatchers(DELETE, String.format("/%s/user/deleteDoctor",apiPrefix)).hasRole(Role.admin)
-                            .requestMatchers(GET, String.format("/%s/user/getScheduleByDoctor",apiPrefix)).hasRole(Role.doctor)
+//                            .requestMatchers(GET, String.format("/%s/user/getScheduleByDoctor",apiPrefix)).hasRole(Role.doctor)
                             .requestMatchers(POST, String.format("/%s/user/addSchedule",apiPrefix)).hasRole(Role.doctor)
                             .requestMatchers(PUT, String.format("/%s/user/resetSchedule",apiPrefix)).hasRole(Role.doctor)
                             .requestMatchers(DELETE, String.format("/%s/user/deleteSchedule",apiPrefix)).hasRole(Role.doctor)

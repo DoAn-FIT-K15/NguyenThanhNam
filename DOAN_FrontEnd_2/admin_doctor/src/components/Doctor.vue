@@ -178,10 +178,10 @@
 
                 <div class="center content-inputs">
                   <div style="display: flex; width: 220px; font-size: 13px;">
-                    <vs-radio v-model="editingDoctor.gender" value="male">
+                    <vs-radio v-model="editingDoctor.gender" value="Nam">
                       Nam
                     </vs-radio>
-                    <vs-radio class="ml-3" v-model="editingDoctor.gender" value="female">
+                    <vs-radio class="ml-3" v-model="editingDoctor.gender" value="Nữ">
                       Nữ
                     </vs-radio>
                   </div>
@@ -243,7 +243,7 @@
                     <vs-button @click="deleteDoctor(item.email)" transparent>
                       Ok
                     </vs-button>
-                    <vs-button @click="confirm = false" dark transparent>
+                    <vs-button @click="confirmDelete = false" dark transparent>
                       Cancel
                     </vs-button>
                   </div>
@@ -346,7 +346,7 @@ const handleAddDoctor = async () => {
       }
     );
     alert("Thêm bác sĩ thành công")
-    window.location.reload();
+    addDoctorDialog.value = false;
 
 
   } catch (error) {

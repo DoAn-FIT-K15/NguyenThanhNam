@@ -42,8 +42,8 @@
 
                     <a-form-item label="">
                         <a-radio-group v-model:value="formState.gender">
-                            <a-radio value="male">Nam</a-radio>
-                            <a-radio value="female">Nữ</a-radio>
+                            <a-radio value="Nam">Nam</a-radio>
+                            <a-radio value="Nữ">Nữ</a-radio>
                         </a-radio-group>
                     </a-form-item>
 
@@ -125,7 +125,7 @@
 
 
                     <a-form-item class="mt-3" :wrapper-col="{ span: 14, offset: 8 }">
-                        <a-button type="primary" @click="booking(scheduleTime)">Xác nhận đặt khám</a-button>
+                        <vs-button ref="button" flat @click="booking(scheduleTime)">Xác nhận đặt khám</vs-button>
                     </a-form-item>
 
 
@@ -159,7 +159,10 @@ const formState = ref({
     history: '',
 });
 
+
+
 const booking = async (scheduleTime) => {
+    
     try {
         const bookingScheduleRequest = {
             scheduleID: scheduleTime.scheduleID,
@@ -171,12 +174,29 @@ const booking = async (scheduleTime) => {
             reason: formState.value.reason,
             medicalHistoryPatient: formState.value.history,
         }
+
+        // Lưu thông tin đặt khám vào LocalStorage
+        const bookedAppointments = JSON.parse(localStorage.getItem('bookedAppointments')) || [];
+        bookedAppointments.push({
+            scheduleID: scheduleTime.scheduleID,
+            namePatient: formState.value.name,
+            time: scheduleTime.time,
+            nameClinic: scheduleTime.nameClinic,
+            addressClinic: scheduleTime.addressClinic,
+            selectedDay: scheduleTime.selectedDay,
+            avata: scheduleTime.avata,
+            name: scheduleTime.name,
+            position: scheduleTime.position,
+            price: scheduleTime.price
+        });
+
         // Kiểm tra giá trị của bookingScheduleRequest
         console.log('Booking Schedule Request:', bookingScheduleRequest);
 
 
         const response = await axios.put("http://localhost:8088/api/v1/user/bookingSchedule", bookingScheduleRequest)
         alert("Đặt lịch thành công")
+        localStorage.setItem('bookedAppointments', JSON.stringify(bookedAppointments));
         router.push("/")
 
     } catch (error) {
