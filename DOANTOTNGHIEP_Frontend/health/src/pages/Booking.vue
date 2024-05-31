@@ -159,11 +159,23 @@ const formState = ref({
     history: '',
 });
 
-
+import { VsLoadingFn } from 'vuesax-alpha'
 
 const booking = async (scheduleTime) => {
-    
+    let loadingInstance;
     try {
+        let showAlert = true; // Biến flag để xác định xem alert đã được hiển thị hay không
+
+        loadingInstance = VsLoadingFn({
+            text: 'Loading...',
+        });
+
+        setTimeout(() => {
+            if (showAlert) {
+                loadingInstance.close(); // Đóng loading nếu alert chưa được hiển thị
+            }
+        }, 20000);
+
         const bookingScheduleRequest = {
             scheduleID: scheduleTime.scheduleID,
             namePatient: formState.value.name,
@@ -173,7 +185,7 @@ const booking = async (scheduleTime) => {
             yearPatient: formState.value.year,
             reason: formState.value.reason,
             medicalHistoryPatient: formState.value.history,
-        }
+        };
 
         // Lưu thông tin đặt khám vào LocalStorage
         const bookedAppointments = JSON.parse(localStorage.getItem('bookedAppointments')) || [];
@@ -193,24 +205,29 @@ const booking = async (scheduleTime) => {
         // Kiểm tra giá trị của bookingScheduleRequest
         console.log('Booking Schedule Request:', bookingScheduleRequest);
 
+        const response = await axios.put("http://localhost:8088/api/v1/user/bookingSchedule", bookingScheduleRequest);
 
-        const response = await axios.put("http://localhost:8088/api/v1/user/bookingSchedule", bookingScheduleRequest)
-        alert("Đặt lịch thành công")
+        // Xác nhận đặt lịch thành công
+        alert("Đặt lịch thành công");
+        showAlert = false; // Đặt biến flag thành false để ngăn loading đóng lại
+
         localStorage.setItem('bookedAppointments', JSON.stringify(bookedAppointments));
-        router.push("/")
-
+        router.push("/");
     } catch (error) {
         if (error.response.status == "404") {
-            alert("Đặt thất bại ! Khách hàng khác đã đặt lịch trình này, vui lòng chọn lịch khác")
+            alert("Đặt thất bại ! Khách hàng khác đã đặt lịch trình này, vui lòng chọn lịch khác");
         }
         if (error.response.status == "400") {
-            alert("Vui lòng nhập đầy đủ các thông tin cần thiết")
+            alert("Vui lòng nhập đầy đủ các thông tin cần thiết");
         }
         if (error.response.status == "500") {
-            alert("Lỗi kết nối")
+            alert("Lỗi kết nối");
         }
+    } finally {
+        loadingInstance.close(); // Đóng loading khi kết thúc
     }
 };
+
 
 
 const handleFileChange = (event) => {

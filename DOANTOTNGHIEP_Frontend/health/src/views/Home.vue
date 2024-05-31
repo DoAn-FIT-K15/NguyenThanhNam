@@ -6,8 +6,9 @@
                 :show-arrows="hover"
                 :cycle="true"
                 :hide-delimiter-background="true"
+                interval="4000"
             >
-                <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                <v-carousel-item v-for="(slide, i) in slides" :key="i" >
                 <v-sheet height="100%">
                     <div class="d-flex fill-height justify-center align-center ">
                         <a href="">
@@ -156,7 +157,6 @@ const listExam = computed(() => {
 
 const slides = ref([
   { src: 'slide1.png' },
-  { src: 'slide3.png' },
   { src: 'slide5.png' },
 ]);
 

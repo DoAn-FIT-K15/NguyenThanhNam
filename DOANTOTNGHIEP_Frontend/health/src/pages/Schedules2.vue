@@ -35,7 +35,7 @@
               </select>
               <ul class="row mt-2 mb-2">
                 <li class="schedule-item col-xl-3 col-lg-4 col-md-6 col-sm-4 col-6" v-for="schedule in filteredSchedules" :key="schedule.time" @click="handleScheduleClick(listSche, schedule)">
-                  <p class="mb-0" style="font-size: 14px;"> {{ schedule.time }}</p>
+                  <p class="mb-0" style="font-size: 14px; font-weight: 550 !important ;"> {{ schedule.time }}</p>
                 </li>
               </ul>
             </div>

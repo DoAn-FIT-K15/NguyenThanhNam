@@ -43,7 +43,13 @@
     </v-card-title>
 
     <v-divider></v-divider>
-    <v-data-table v-model:search="search" :items="listSchedule" hover :headers="headerSchedule">
+    <v-data-table v-model:search="search" :items="listSchedule" hover :headers="headerSchedule" :items-per-page-options="[
+    { value: 5, title: '05' },
+    { value: 10, title: '10' },
+    { value: 15, title: '15' },
+    { value: 20, title: '20' }
+    ]"
+>
       <template v-slot:item.date="{ item }">
         <span style="display: inline-block; min-width: 100px;">{{ item.date }}</span>
       </template>
@@ -78,7 +84,7 @@
       <template v-slot:item.action="{ item }">
         <div style="min-width: 140px; max-width: 150px; display: flex; align-items: center;" class="my-2" rounded>
           <div class="center">
-            <vs-button @click="openResetDiaglog(item.id)"  v-if="!item.empty">
+            <vs-button style="background-color: yellow; color: black;" @click="openResetDiaglog(item.id)"  v-if="!item.empty">
               Reset</vs-button>
             <vs-dialog width="550px" not-center v-model="resetScheduleDialog">
               <template #header>
